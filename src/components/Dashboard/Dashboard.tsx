@@ -4,6 +4,7 @@ import RevenueChart from './RevenueChart';
 import OccupancyChart from './OccupancyChart';
 import RecentBookings from './RecentBookings';
 import PropertyStatus from './PropertyStatus';
+import CustomerOriginChart from './CustomerOriginChart';
 
 const Dashboard: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <RecentBookings />
         <PropertyStatus />
+        <CustomerOriginChart />
       </div>
     </div>
   );

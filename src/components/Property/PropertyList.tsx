@@ -4,9 +4,10 @@ import { Eye, Edit, Trash2, MoreHorizontal, MapPin, Bed, Bath, Users } from 'luc
 interface PropertyListProps {
   searchTerm: string;
   statusFilter: string;
+  onSelectProperty: (propertyId: string) => void;
 }
 
-const PropertyList: React.FC<PropertyListProps> = ({ searchTerm, statusFilter }) => {
+const PropertyList: React.FC<PropertyListProps> = ({ searchTerm, statusFilter, onSelectProperty }) => {
   const properties = [
     {
       id: 'PROP001',
@@ -179,11 +180,17 @@ const PropertyList: React.FC<PropertyListProps> = ({ searchTerm, statusFilter })
             </div>
             
             <div className="flex items-center space-x-2">
-              <button className="flex-1 flex items-center justify-center space-x-1 bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700 transition-colors">
+              <button
+                onClick={() => onSelectProperty(property.id)}
+                className="flex-1 flex items-center justify-center space-x-1 bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700 transition-colors"
+              >
                 <Eye className="w-4 h-4" />
                 <span>查看</span>
               </button>
-              <button className="flex items-center justify-center space-x-1 border border-gray-300 text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors">
+              <button
+                onClick={() => onSelectProperty(property.id)}
+                className="flex items-center justify-center space-x-1 border border-gray-300 text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors"
+              >
                 <Edit className="w-4 h-4" />
               </button>
               <button className="flex items-center justify-center space-x-1 border border-gray-300 text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors">

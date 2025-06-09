@@ -1,12 +1,34 @@
 import React from 'react';
 import { Bell, Search, User } from 'lucide-react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  activeModule?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ activeModule }) => {
+  const getModuleTitle = (module: string) => {
+    const moduleMap: { [key: string]: string } = {
+      'dashboard': '仪表盘',
+      'properties': '房源管理',
+      'orders': '订单管理',
+      'channels': '渠道管理',
+      'analytics': '数据分析',
+      'crm': '客户关系管理',
+      'hardware': '智能硬件',
+      'admin': '系统管理',
+      'customerServiceSession': '客服会话',
+      'intelligentPricing': '智能定价决策',
+      'intelligentInventoryAllocation': '智能库存分配',
+      'marketingStrategyOptimization': '营销策略优化',
+    };
+    return moduleMap[module] || 'PMS管理系统';
+  };
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <h2 className="text-lg font-semibold text-gray-800">房产管理系统</h2>
+          <h2 className="text-lg font-semibold text-gray-800">{getModuleTitle(activeModule || 'dashboard')}</h2>
         </div>
         
         <div className="flex items-center space-x-4">
@@ -21,7 +43,7 @@ const Header: React.FC = () => {
           
           <button className="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
             <Bell className="w-5 h-5" />
-            <span className="absolute top-0 right-0 w-2 h-2 bg-error-500 rounded-full"></span>
+            <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
           </button>
           
           <div className="flex items-center space-x-2">

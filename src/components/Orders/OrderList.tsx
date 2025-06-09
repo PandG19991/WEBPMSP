@@ -5,9 +5,10 @@ interface OrderListProps {
   searchTerm: string;
   statusFilter: string;
   dateRange: string;
+  onSelectOrder: (orderId: string) => void;
 }
 
-const OrderList: React.FC<OrderListProps> = ({ searchTerm, statusFilter, dateRange }) => {
+const OrderList: React.FC<OrderListProps> = ({ searchTerm, statusFilter, dateRange, onSelectOrder }) => {
   const orders = [
     {
       id: 'BK001',
@@ -201,7 +202,11 @@ const OrderList: React.FC<OrderListProps> = ({ searchTerm, statusFilter, dateRan
         </thead>
         <tbody>
           {filteredOrders.map((order) => (
-            <tr key={order.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+            <tr
+              key={order.id}
+              onClick={() => onSelectOrder(order.id)}
+              className="border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer"
+            >
               <td className="py-4 px-4">
                 <div>
                   <p className="font-medium text-gray-900">{order.id}</p>
@@ -248,7 +253,7 @@ const OrderList: React.FC<OrderListProps> = ({ searchTerm, statusFilter, dateRan
                 <div>
                   <p className="font-semibold text-gray-900">¥{order.amount.toLocaleString()}</p>
                   <div className="flex items-center space-x-1">
-                    <CreditCard className={`w-3 h-3 ${getPaymentStatusColor(order.paymentStatus)}`} />
+                    <CreditCard className="w-3 h-3 text-gray-400" />
                     <span className={`text-sm ${getPaymentStatusColor(order.paymentStatus)}`}>
                       {getPaymentStatusText(order.paymentStatus)}
                     </span>
@@ -270,7 +275,10 @@ const OrderList: React.FC<OrderListProps> = ({ searchTerm, statusFilter, dateRan
               
               <td className="py-4 px-4">
                 <div className="flex items-center space-x-2">
-                  <button className="p-1 text-gray-400 hover:text-primary-600 transition-colors">
+                  <button 
+                    onClick={(e) => { e.stopPropagation(); onSelectOrder(order.id); }}
+                    className="text-primary-600 hover:text-primary-800 transition-colors"
+                  >
                     <Eye className="w-4 h-4" />
                   </button>
                   

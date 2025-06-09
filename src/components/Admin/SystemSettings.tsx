@@ -23,7 +23,7 @@ const SystemSettings: React.FC = () => {
 
   const handleSave = () => {
     // Handle save settings
-    console.log('Saving settings:', settings);
+    console.log('保存设置:', settings);
   };
 
   return (
